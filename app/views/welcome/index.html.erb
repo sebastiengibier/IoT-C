@@ -1,0 +1,31 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+<%
+require 'twitter'
+
+twitter = Twitter::REST::Client.new do |config|
+  config.consumer_key = 'EWZGuqVKc9Jm96Es4ofDCST2k'
+  config.consumer_secret = 'jrxG6K3NklSovvZsNl2OqC78NEAWFlyZw308bkDLH3xI17lJ4J'
+  config.access_token = '35761114-l4lVunQRM4hE7Wo9Bqdwm1XTWvdho2cL7oxCBMZLN'
+  config.access_token_secret = 'x3wpX7QXrJzndyoALRYeJLfiTH8rWKHKorntdTyAg2gBd'
+end
+
+# twitter.update("I'm tweeting with @gem!")
+#twitter.user_timeline("sebastiengibier")
+@tweets = twitter.user_timeline("sebastiengibier", count: 4)
+
+
+%>
+
+
+<div><%= @tweets.inspect %></div>
+<table>
+  <% @tweets.each do |tweet| %>
+    <tr>
+      <td><%= tweet.id %></td>
+      <td><%= tweet.text %></td>
+      <td><%= tweet.uri %></td>
+    </tr>
+  <% end %>
+</table>
